@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -19,6 +21,11 @@ public class NhanVien {
 		private String ten;
 		@Column(name = "Luong")
 		private int  luong;
-		@OneToMany(mappedBy = "MaNV")
-		private List<ChungNhan> chungNhan;
+//		@OneToMany(mappedBy = "MaNV")
+		@ManyToMany
+		@JoinTable(name="chuyenbay",
+			 joinColumns=@JoinColumn(name="MaNV"),
+			 inverseJoinColumns=@JoinColumn(name="MaCB")
+		)
+		private List<MayBay> mayBays;
 }
